@@ -2,7 +2,7 @@
 
 return [
 
-    'app'               => 'Laravel',
+    'app'               => 'THANIYAGROUP-ASSET',
     'app2'              => 'Auth :version',
     'home'              => 'Home',
     'login'             => 'Login',
@@ -36,4 +36,9 @@ return [
     'laravelBlocker'    => 'Blocker',
 
     'laravelroles'      => 'Roles Administration',
+
+    //New menu
+    'adminDepartment'   => 'Department Manage',
+    'adminCompany'      => 'Company Manage',
+    
 ];

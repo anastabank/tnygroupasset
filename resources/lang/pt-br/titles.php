@@ -2,7 +2,7 @@
 
 return [
 
-    'app'               => 'Laravel',
+    'app'               => 'THANIYAGROUP-ASSET',
     'app2'              => 'Auth 4.0',
     'home'              => 'Inicio',
     'login'             => 'Login',

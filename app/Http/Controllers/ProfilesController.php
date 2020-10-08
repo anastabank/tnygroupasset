@@ -69,7 +69,7 @@ class ProfilesController extends Controller
             'user'         => $user,
             'currentTheme' => $currentTheme,
         ];
-
+        // dd($currentTheme);
         return view('profiles.show')->with($data);
     }
 

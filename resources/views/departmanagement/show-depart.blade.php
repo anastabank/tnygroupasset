@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('template_title')
-  {!! trans('usersmanagement.showing-user', ['name' => $user->name]) !!}
+  {!! trans('departmentsmanagement.showing-department', ['name' => $department->dname]) !!}
 @endsection
 
 @php
-  $levelAmount = trans('usersmanagement.labelUserLevel');
-  if ($user->level() >= 2) {
-    $levelAmount = trans('usersmanagement.labelUserLevels');
+  $levelAmount = trans('departmentsmanagement.labelDepartmentLevel');
+  if ($department->level() >= 2) {
+    $levelAmount = trans('departmentsmanagement.labelDepartmentLevels');
   }
 @endphp
 
@@ -19,13 +19,13 @@
 
         <div class="card">
 
-          <div class="card-header text-white @if ($user->activated == 1) bg-success @else bg-danger @endif">
+          <div class="card-header text-white @if ($department->activated == 1) bg-success @else bg-danger @endif">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              {!! trans('usersmanagement.showing-user-title', ['name' => $user->name]) !!}
+              {!! trans('departmentsmanagement.showing-department-title', ['name' => $department->name]) !!}
               <div class="float-right">
-                <a href="{{ route('users') }}" class="btn btn-light btn-sm float-right" data-toggle="tooltip" data-placement="left" title="{{ trans('usersmanagement.tooltips.back-user') }}">
+                <a href="{{ route('departments') }}" class="btn btn-light btn-sm float-right" data-toggle="tooltip" data-placement="left" title="{{ trans('departmentsmanagement.tooltips.back-departments') }}">
                   <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
-                  {!! trans('usersmanagement.buttons.back-to-users') !!}
+                  {!! trans('departmentsmanagement.buttons.back-to-departments') !!}
                 </a>
               </div>
             </div>
@@ -35,34 +35,34 @@
 
             <div class="row">
               <div class="col-sm-4 offset-sm-2 col-md-2 offset-md-3">
-                <img src="@if ($user->profile && $user->profile->avatar_status == 1) {{ $user->profile->avatar }} @else {{ Gravatar::get($user->email) }} @endif" alt="{{ $user->name }}" class="rounded-circle center-block mb-3 mt-4 user-image">
+                <img src="@if ($department->profile && $department->profile->avatar_status == 1) {{ $department->profile->avatar }} @else {{ Gravatar::get($department->email) }} @endif" alt="{{ $department->name }}" class="rounded-circle center-block mb-3 mt-4 department-image">
               </div>
               <div class="col-sm-4 col-md-6">
                 <h4 class="text-muted margin-top-sm-1 text-center text-left-tablet">
-                  {{ $user->name }}
+                  {{ $department->name }}
                 </h4>
                 <p class="text-center text-left-tablet">
                   <strong>
-                    {{ $user->first_name }} {{ $user->last_name }}
+                    {{ $department->first_name }} {{ $department->last_name }}
                   </strong>
-                  @if($user->email)
+                  @if($department->email)
                     <br />
-                    <span class="text-center" data-toggle="tooltip" data-placement="top" title="{{ trans('usersmanagement.tooltips.email-user', ['user' => $user->email]) }}">
-                      {{ Html::mailto($user->email, $user->email) }}
+                    <span class="text-center" data-toggle="tooltip" data-placement="top" title="{{ trans('departmentsmanagement.tooltips.email-department', ['department' => $department->email]) }}">
+                      {{ Html::mailto($department->email, $department->email) }}
                     </span>
                   @endif
                 </p>
-                @if ($user->profile)
+                @if ($department->profile)
                   <div class="text-center text-left-tablet mb-4">
-                    <a href="{{ url('/profile/'.$user->name) }}" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="left" title="{{ trans('usersmanagement.viewProfile') }}">
-                      <i class="fa fa-eye fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md"> {{ trans('usersmanagement.viewProfile') }}</span>
+                    <a href="{{ url('/profile/'.$department->name) }}" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="left" title="{{ trans('departmentsmanagement.viewProfile') }}">
+                      <i class="fa fa-eye fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md"> {{ trans('departmentsmanagement.viewProfile') }}</span>
                     </a>
-                    <a href="/users/{{$user->id}}/edit" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="{{ trans('usersmanagement.editUser') }}">
-                      <i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md"> {{ trans('usersmanagement.editUser') }} </span>
+                    <a href="/departments/{{$department->id}}/edit" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="{{ trans('departmentsmanagement.editUser') }}">
+                      <i class="fa fa-pencil fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md"> {{ trans('departmentsmanagement.editUser') }} </span>
                     </a>
-                    {!! Form::open(array('url' => 'users/' . $user->id, 'class' => 'form-inline', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'title' => trans('usersmanagement.deleteUser'))) !!}
+                    {!! Form::open(array('url' => 'departments/' . $department->id, 'class' => 'form-inline', 'data-toggle' => 'tooltip', 'data-placement' => 'right', 'title' => trans('departmentsmanagement.deleteUser'))) !!}
                       {!! Form::hidden('_method', 'DELETE') !!}
-                      {!! Form::button('<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md">' . trans('usersmanagement.deleteUser') . '</span>' , array('class' => 'btn btn-danger btn-sm','type' => 'button', 'data-toggle' => 'modal', 'data-target' => '#confirmDelete', 'data-title' => 'Delete User', 'data-message' => 'Are you sure you want to delete this user?')) !!}
+                      {!! Form::button('<i class="fa fa-trash-o fa-fw" aria-hidden="true"></i> <span class="hidden-xs hidden-sm hidden-md">' . trans('departmentsmanagement.deleteUser') . '</span>' , array('class' => 'btn btn-danger btn-sm','type' => 'button', 'data-toggle' => 'modal', 'data-target' => '#confirmDelete', 'data-title' => 'Delete User', 'data-message' => 'Are you sure you want to delete this department?')) !!}
                     {!! Form::close() !!}
                   </div>
                 @endif
@@ -72,16 +72,16 @@
             <div class="clearfix"></div>
             <div class="border-bottom"></div>
 
-            @if ($user->name)
+            @if ($department->name)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelUserName') }}
+                  {{ trans('departmentsmanagement.labelUserName') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
-                {{ $user->name }}
+                {{ $department->name }}
               </div>
 
               <div class="clearfix"></div>
@@ -89,17 +89,17 @@
 
             @endif
 
-            @if ($user->email)
+            @if ($department->email)
 
             <div class="col-sm-5 col-6 text-larger">
               <strong>
-                {{ trans('usersmanagement.labelEmail') }}
+                {{ trans('departmentsmanagement.labelEmail') }}
               </strong>
             </div>
 
             <div class="col-sm-7">
-              <span data-toggle="tooltip" data-placement="top" title="{{ trans('usersmanagement.tooltips.email-user', ['user' => $user->email]) }}">
-                {{ HTML::mailto($user->email, $user->email) }}
+              <span data-toggle="tooltip" data-placement="top" title="{{ trans('departmentsmanagement.tooltips.email-department', ['department' => $department->email]) }}">
+                {{ HTML::mailto($department->email, $department->email) }}
               </span>
             </div>
 
@@ -108,16 +108,16 @@
 
             @endif
 
-            @if ($user->first_name)
+            @if ($department->first_name)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelFirstName') }}
+                  {{ trans('departmentsmanagement.labelFirstName') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
-                {{ $user->first_name }}
+                {{ $department->first_name }}
               </div>
 
               <div class="clearfix"></div>
@@ -125,16 +125,16 @@
 
             @endif
 
-            @if ($user->last_name)
+            @if ($department->last_name)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelLastName') }}
+                  {{ trans('departmentsmanagement.labelLastName') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
-                {{ $user->last_name }}
+                {{ $department->last_name }}
               </div>
 
               <div class="clearfix"></div>
@@ -142,59 +142,22 @@
 
             @endif
 
-            <!-- เพิ่มแผนก -->
-            <!-- @if ($user->profile->department_id) -->
-
-              <div class="col-sm-5 col-6 text-larger">
-                <strong>
-                  {{ trans('usersmanagement.labelDepartment') }}
-                </strong>
-              </div>
-
-              <div class="col-sm-7">
-                {{ $currentDepartment->dname }}
-              </div>
-
-              <div class="clearfix"></div>
-              <div class="border-bottom"></div>
-
-            <!-- @endif -->
-            <!-- end department -->
-
-            <!-- เพิ่มบริษัท -->
-            <!-- @if ($user->profile->department_id) -->
-
-            <div class="col-sm-5 col-6 text-larger">
-                <strong>
-                  {{ trans('usersmanagement.labelCompany') }}
-                </strong>
-              </div>
-
-              <div class="col-sm-7">
-                {{ $currentCompany->cname }}
-              </div>
-
-              <div class="clearfix"></div>
-              <div class="border-bottom"></div>
-
-            <!-- @endif -->
-            <!-- end department -->
             <div class="col-sm-5 col-6 text-larger">
               <strong>
-                {{ trans('usersmanagement.labelRole') }}
+                {{ trans('departmentsmanagement.labelRole') }}
               </strong>
             </div>
 
             <div class="col-sm-7">
-              @foreach ($user->roles as $user_role)
+              @foreach ($department->roles as $department_role)
 
-                @if ($user_role->name == 'User')
+                @if ($department_role->name == 'User')
                   @php $badgeClass = 'primary' @endphp
 
-                @elseif ($user_role->name == 'Admin')
+                @elseif ($department_role->name == 'Admin')
                   @php $badgeClass = 'warning' @endphp
 
-                @elseif ($user_role->name == 'Unverified')
+                @elseif ($department_role->name == 'Unverified')
                   @php $badgeClass = 'danger' @endphp
 
                 @else
@@ -202,7 +165,7 @@
 
                 @endif
 
-                <span class="badge badge-{{$badgeClass}}">{{ $user_role->name }}</span>
+                <span class="badge badge-{{$badgeClass}}">{{ $department_role->name }}</span>
 
               @endforeach
             </div>
@@ -212,12 +175,12 @@
 
             <div class="col-sm-5 col-6 text-larger">
               <strong>
-                {{ trans('usersmanagement.labelStatus') }}
+                {{ trans('departmentsmanagement.labelStatus') }}
               </strong>
             </div>
 
             <div class="col-sm-7">
-              @if ($user->activated == 1)
+              @if ($department->activated == 1)
                 <span class="badge badge-success">
                   Activated
                 </span>
@@ -233,29 +196,29 @@
 
             <div class="col-sm-5 col-6 text-larger">
               <strong>
-                {{ trans('usersmanagement.labelAccessLevel')}} {{ $levelAmount }}:
+                {{ trans('departmentsmanagement.labelAccessLevel')}} {{ $levelAmount }}:
               </strong>
             </div>
 
             <div class="col-sm-7">
 
-              @if($user->level() >= 5)
+              @if($department->level() >= 5)
                 <span class="badge badge-primary margin-half margin-left-0">5</span>
               @endif
 
-              @if($user->level() >= 4)
+              @if($department->level() >= 4)
                  <span class="badge badge-info margin-half margin-left-0">4</span>
               @endif
 
-              @if($user->level() >= 3)
+              @if($department->level() >= 3)
                 <span class="badge badge-success margin-half margin-left-0">3</span>
               @endif
 
-              @if($user->level() >= 2)
+              @if($department->level() >= 2)
                 <span class="badge badge-warning margin-half margin-left-0">2</span>
               @endif
 
-              @if($user->level() >= 1)
+              @if($department->level() >= 1)
                 <span class="badge badge-default margin-half margin-left-0">1</span>
               @endif
 
@@ -266,30 +229,30 @@
 
             <div class="col-sm-5 col-6 text-larger">
               <strong>
-                {{ trans('usersmanagement.labelPermissions') }}
+                {{ trans('departmentsmanagement.labelPermissions') }}
               </strong>
             </div>
 
             <div class="col-sm-7">
-              @if($user->canViewUsers())
+              @if($department->canViewUsers())
                 <span class="badge badge-primary margin-half margin-left-0">
                   {{ trans('permsandroles.permissionView') }}
                 </span>
               @endif
 
-              @if($user->canCreateUsers())
+              @if($department->canCreateUsers())
                 <span class="badge badge-info margin-half margin-left-0">
                   {{ trans('permsandroles.permissionCreate') }}
                 </span>
               @endif
 
-              @if($user->canEditUsers())
+              @if($department->canEditUsers())
                 <span class="badge badge-warning margin-half margin-left-0">
                   {{ trans('permsandroles.permissionEdit') }}
                 </span>
               @endif
 
-              @if($user->canDeleteUsers())
+              @if($department->canDeleteUsers())
                 <span class="badge badge-danger margin-half margin-left-0">
                   {{ trans('permsandroles.permissionDelete') }}
                 </span>
@@ -299,16 +262,16 @@
             <div class="clearfix"></div>
             <div class="border-bottom"></div>
 
-            @if ($user->created_at)
+            @if ($department->created_at)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelCreatedAt') }}
+                  {{ trans('departmentsmanagement.labelCreatedAt') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
-                {{ $user->created_at }}
+                {{ $department->created_at }}
               </div>
 
               <div class="clearfix"></div>
@@ -316,16 +279,16 @@
 
             @endif
 
-            @if ($user->updated_at)
+            @if ($department->updated_at)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelUpdatedAt') }}
+                  {{ trans('departmentsmanagement.labelUpdatedAt') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
-                {{ $user->updated_at }}
+                {{ $department->updated_at }}
               </div>
 
               <div class="clearfix"></div>
@@ -333,17 +296,17 @@
 
             @endif
 
-            @if ($user->signup_ip_address)
+            @if ($department->signup_ip_address)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelIpEmail') }}
+                  {{ trans('departmentsmanagement.labelIpEmail') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
                 <code>
-                  {{ $user->signup_ip_address }}
+                  {{ $department->signup_ip_address }}
                 </code>
               </div>
 
@@ -352,17 +315,17 @@
 
             @endif
 
-            @if ($user->signup_confirmation_ip_address)
+            @if ($department->signup_confirmation_ip_address)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelIpConfirm') }}
+                  {{ trans('departmentsmanagement.labelIpConfirm') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
                 <code>
-                  {{ $user->signup_confirmation_ip_address }}
+                  {{ $department->signup_confirmation_ip_address }}
                 </code>
               </div>
 
@@ -371,17 +334,17 @@
 
             @endif
 
-            @if ($user->signup_sm_ip_address)
+            @if ($department->signup_sm_ip_address)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelIpSocial') }}
+                  {{ trans('departmentsmanagement.labelIpSocial') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
                 <code>
-                  {{ $user->signup_sm_ip_address }}
+                  {{ $department->signup_sm_ip_address }}
                 </code>
               </div>
 
@@ -390,17 +353,17 @@
 
             @endif
 
-            @if ($user->admin_ip_address)
+            @if ($department->admin_ip_address)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelIpAdmin') }}
+                  {{ trans('departmentsmanagement.labelIpAdmin') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
                 <code>
-                  {{ $user->admin_ip_address }}
+                  {{ $department->admin_ip_address }}
                 </code>
               </div>
 
@@ -409,17 +372,17 @@
 
             @endif
 
-            @if ($user->updated_ip_address)
+            @if ($department->updated_ip_address)
 
               <div class="col-sm-5 col-6 text-larger">
                 <strong>
-                  {{ trans('usersmanagement.labelIpUpdate') }}
+                  {{ trans('departmentsmanagement.labelIpUpdate') }}
                 </strong>
               </div>
 
               <div class="col-sm-7">
                 <code>
-                  {{ $user->updated_ip_address }}
+                  {{ $department->updated_ip_address }}
                 </code>
               </div>
 
@@ -441,7 +404,7 @@
 
 @section('footer_scripts')
   @include('scripts.delete-modal-script')
-  @if(config('usersmanagement.tooltipsEnabled'))
+  @if(config('departmentsmanagement.tooltipsEnabled'))
     @include('scripts.tooltips')
   @endif
 @endsection

@@ -55,12 +55,12 @@ return [
     /*
      * ReCaptcha Site Key
      */
-    'reCaptchSite'   => env('RE_CAP_SITE', 'YOURGOOGLECAPTCHAsitekeyHERE'),
+    'reCaptchSite'   => env('RE_CAP_SITE', '6LcopdEZAAAAADGur3J1rwCxKPSHuLJ3GymehoYb'),
 
     /*
      * ReCaptcha Secret
      */
-    'reCaptchSecret' => env('RE_CAP_SECRET', 'YOURGOOGLECAPTCHAsecretHERE'),
+    'reCaptchSecret' => env('RE_CAP_SECRET', '6LcopdEZAAAAAKwVOAmS4Vo9obRyiR-badnQfw2y'),
 
     /*
      * Google Maps API V3 Status

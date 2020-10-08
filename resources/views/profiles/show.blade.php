@@ -23,6 +23,16 @@
                 <div class="card">
                     <div class="card-header">
                         {{ trans('profile.showProfileTitle',['username' => $user->name]) }}
+                        <div class="float-right">
+                            <a href="{{ route('users') }}" class="btn btn-light btn-sm float-right" data-toggle="tooltip" data-placement="top" title="{{ trans('usersmanagement.tooltips.back-users') }}">
+                                    <i class="fa fa-fw fa-reply-all" aria-hidden="true"></i>
+                                    {!! trans('usersmanagement.buttons.back-to-users') !!}
+                            </a>
+                            <a href="{{ url('/users/' . $user->id) }}" class="btn btn-light btn-sm float-right" data-toggle="tooltip" data-placement="left" title="{{ trans('usersmanagement.tooltips.back-users') }}">
+                                    <i class="fa fa-fw fa-reply" aria-hidden="true"></i>
+                                    {!! trans('usersmanagement.buttons.back-to-user') !!}
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
 

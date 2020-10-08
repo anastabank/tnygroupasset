@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Models\User;
+use App\Models\Department;
+use App\Models\Company;
 use App\Traits\CaptureIpTrait;
 use Auth;
 use Illuminate\Http\Request;
@@ -50,8 +52,10 @@ class UsersManagementController extends Controller
     public function create()
     {
         $roles = Role::all();
+        $departments = Department::all();
+        $companys = Company::all();
 
-        return view('usersmanagement.create-user', compact('roles'));
+        return view('usersmanagement.create-user', compact('roles','departments','companys'));
     }
 
     /**
@@ -73,6 +77,8 @@ class UsersManagementController extends Controller
                 'password'              => 'required|min:6|max:20|confirmed',
                 'password_confirmation' => 'required|same:password',
                 'role'                  => 'required',
+                'department'            => 'required',
+                'company'               => 'required',
             ],
             [
                 'name.unique'         => trans('auth.userNameTaken'),
@@ -85,6 +91,8 @@ class UsersManagementController extends Controller
                 'password.min'        => trans('auth.PasswordMin'),
                 'password.max'        => trans('auth.PasswordMax'),
                 'role.required'       => trans('auth.roleRequired'),
+                'department.required' => trans('auth.departmentRequired'),
+                'company.required'    => trans('auth.companyRequired'),
             ]
         );
 
@@ -105,7 +113,12 @@ class UsersManagementController extends Controller
             'admin_ip_address' => $ipAddress->getClientIp(),
             'activated'        => 1,
         ]);
-
+        
+       
+        
+        // dd($profile);
+        $profile->department_id = $request->input('department');
+        $profile->company_id = $request->input('company');
         $user->profile()->save($profile);
         $user->attachRole($request->input('role'));
         $user->save();
@@ -122,7 +135,21 @@ class UsersManagementController extends Controller
      */
     public function show(User $user)
     {
-        return view('usersmanagement.show-user', compact('user'));
+        $currentDepartment = Department::find($user->profile->department_id);
+        $currentCompany = Company::find($user->profile->company_id);
+
+        foreach ($user->profile as $userProfile) {
+            $currentProfile = $userProfile;
+        }
+        
+        $data = [
+            'user'              => $user,
+            'currentDepartment' => $currentDepartment,
+            'currentCompany'    => $currentCompany,
+            'currentProfile'    => $currentProfile,
+        ];
+        // dd($currentDepartment->dname);
+        return view('usersmanagement.show-user', compact('currentDepartment','currentCompany','user'));
     }
 
     /**

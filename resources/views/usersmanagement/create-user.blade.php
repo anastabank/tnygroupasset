@@ -114,7 +114,7 @@
                                             <option value="">{{ trans('forms.create_user_ph_role') }}</option>
                                             @if ($roles)
                                                 @foreach($roles as $role)
-                                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                                    <option value="{{ $role->id }}" @if (old('role') == $role->id) selected="selected" @endif>{{ $role->name }}</option>
                                                 @endforeach
                                             @endif
                                         </select>
@@ -127,6 +127,61 @@
                                     @if ($errors->has('role'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('role') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+
+                            <!-- Department -->
+                            <div class="form-group has-feedback row {{ $errors->has('department') ? ' has-error ' : '' }}">
+                                {!! Form::label('department', trans('forms.create_user_label_department'), array('class' => 'col-md-3 control-label')); !!}
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <select class="custom-select form-control" name="department" id="department">
+                                            <option value="">{{ trans('forms.create_user_ph_department') }}</option>
+                                            @if ($departments)
+                                                @foreach($departments as $department)
+                                                    <option value="{{ $department->id }}" @if (old('department') == $department->id) selected="selected" @endif>{{ $department->dname }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="department">
+                                                <i class="{{ trans('forms.create_user_icon_department') }}" aria-hidden="true"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @if ($errors->has('department'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('department') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <!-- Company -->
+                            <div class="form-group has-feedback row {{ $errors->has('company') ? ' has-error ' : '' }}">
+                                {!! Form::label('company', trans('forms.create_user_label_company'), array('class' => 'col-md-3 control-label')); !!}
+                                <div class="col-md-9">
+                                    <div class="input-group">
+                                        <select class="custom-select form-control" name="company" id="company">
+                                            <option value="">{{ trans('forms.create_user_ph_company') }}</option>
+                                            @if ($companys)
+                                                @foreach($companys as $company)
+                                                    <option value="{{ $company->id }}" @if (old('company') == $company->id) selected="selected" @endif>{{ $company->cname }}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                        <div class="input-group-append">
+                                            <label class="input-group-text" for="company">
+                                                <i class="{{ trans('forms.create_user_icon_company') }}" aria-hidden="true"></i>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    @if ($errors->has('company'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('company') }}</strong>
                                         </span>
                                     @endif
                                 </div>

@@ -76,5 +76,11 @@ return [
     'captchaRequire'   => 'Captcha is required',
     'CaptchaWrong'     => 'Wrong captcha, please try again.',
     'roleRequired'     => 'User role is required.',
+    'departmentRequired' => 'Department is required',
+    'companyRequired'    => 'Company is required',
+    
+    // Validators Department
+    'departmentNameTaken'    => 'Department is taken',
+    'departmentNameRequired' => 'Department is required',
 
 ];

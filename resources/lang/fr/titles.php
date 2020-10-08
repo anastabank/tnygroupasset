@@ -2,7 +2,7 @@
 
 return [
 
-    'app'           => 'GFC Foot Indoor',
+    'app'           => 'THANIYAGROUP-ASSET',
     'app2'          => 'GFC FI Auth 2.0',
     'home'          => 'Accueil',
     'login'         => 'Connexion',

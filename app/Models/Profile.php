@@ -61,4 +61,14 @@ class Profile extends Model
     {
         return $this->hasOne(\App\Models\Theme::class);
     }
+
+    public function department()
+    {
+        return $this->belongsTo(\App\Models\Department::class);
+    }
+
+    public function company()
+    {
+        return $this->belongsTo(\App\Models\Company::class);
+    }
 }

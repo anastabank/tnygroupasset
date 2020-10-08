@@ -28,6 +28,8 @@ return [
     'labelFirstName'         => 'First Name:',
     'labelLastName'          => 'Last Name:',
     'labelRole'              => 'Role:',
+    'labelDepartment'        => 'Department:',
+    'labelCompany'           => 'Company',
     'labelStatus'            => 'Status:',
     'labelAccessLevel'       => 'Access',
     'labelPermissions'       => 'Permissions:',
@@ -104,6 +106,7 @@ return [
         'update-user-success'    => 'Successfully updated user!',
         'delete-success'         => 'Successfully deleted the user!',
         'cannot-delete-yourself' => 'You cannot delete yourself!',
+        'departmentRequired'     => 'User department is required.',
     ],
 
     'show-user' => [
@@ -111,9 +114,11 @@ return [
         'name'              => 'Username',
         'email'             => '<span class="hidden-xs">User </span>Email',
         'role'              => 'User Role',
+        'department'        => 'Department',
         'created'           => 'Created <span class="hidden-xs">at</span>',
         'updated'           => 'Updated <span class="hidden-xs">at</span>',
         'labelRole'         => 'User Role',
+        'labelDepartment'   => 'User Department',
         'labelAccessLevel'  => '<span class="hidden-xs">User</span> Access Level|<span class="hidden-xs">User</span> Access Levels',
     ],
 

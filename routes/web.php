@@ -119,6 +119,8 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
         ],
     ]);
     Route::post('search-users', 'App\Http\Controllers\UsersManagementController@search')->name('search-users');
+    //new route
+    Route::post('search-departments', 'App\Http\Controllers\DepartmentController@search')->name('search-departments');
 
     Route::resource('themes', \App\Http\Controllers\ThemesManagementController::class, [
         'names' => [
@@ -126,10 +128,29 @@ Route::group(['middleware' => ['auth', 'activated', 'role:admin', 'activity', 't
             'destroy' => 'themes.destroy',
         ],
     ]);
+    //New Route Department&Company
+    Route::resource('departments', \App\Http\Controllers\DepartmentController::class, [
+        'names' => [
+            'index'   => 'departments',
+            'destroy' => 'departments.destroy',
+
+        ],
+        'except' => [
+            'deleted',
+        ],
+    ]);
+    Route::resource('/departments/deleted', \App\Http\Controllers\SoftDeletesController::class, [
+        'only' => [
+            'index', 'show', 'update', 'destroy',
+        ],
+    ]);
+    Route::get('companys', 'App\Http\Controllers\CompanyController@index');
 
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
     Route::get('routes', 'App\Http\Controllers\AdminDetailsController@listRoutes');
     Route::get('active-users', 'App\Http\Controllers\AdminDetailsController@activeUsers');
+    
+
 });
 
 Route::redirect('/php', '/phpinfo', 301);
